@@ -34,18 +34,18 @@ Chữ ký điện tử khắc phục được tất cả các nhược điểm t
 
 Trong lý thuyết nhóm, một nhóm cyclic là một nhóm có thể được sinh ra từ một tập hợp sinh chỉ gồm một phần tử $ g $, phần tử này được gọi là phần tử sinh của nhóm.
 
-**Định nghĩa**. Một nhóm $ G $ được gọi là nhóm cyclic nếu trong $ G $ tồn tại phần tử $ g $ sao cho $ G = \langle g \rangle = \{ g^n | n \in \mathbb{N} \} $.
+**Định nghĩa**. Một nhóm $G$ được gọi là nhóm cyclic nếu trong $G$ tồn tại phần tử $g$ sao cho $G = \langle g \rangle = \{ g^n | n \in \mathbb{N} \}$.
 
-Với một nhóm cyclic hữu hạn $ G $ cấp $ q $ ta có $ G = \{ e, g, g^2, ..., g^{q - 1} \} $, với $ e = g^q = g^0 $. Trên thực tế, để đảm bảo an toàn cho các hệ mã, ta phải làm việc với nhóm cyclic có bậc rất lớn ($ q $ cỡ $ 2^{512} $). Khi đó bài toán sau được coi là rất khó giải quyết với các máy tính hiện đại: cho $ g $ và một phần tử ngẫu nhiên $ y \in G $, tìm $ x $ thỏa mãn $ y = g^x $.
+Với một nhóm cyclic hữu hạn $G$ cấp $q$ ta có $G = \{ e, g, g^2, ..., g^{q - 1} \}$, với $e = g^q = g^0$. Trên thực tế, để đảm bảo an toàn cho các hệ mã, ta phải làm việc với nhóm cyclic có bậc rất lớn ($q$ cỡ $2^{512}$). Khi đó bài toán sau được coi là rất khó giải quyết với các máy tính hiện đại: cho $g$ và một phần tử ngẫu nhiên $y \in G$, tìm $x$ thỏa mãn $y = g^x$.
 
-Alice có thể dễ dàng sinh phần tử $ y $ bằng cách chọn ngẫu nhiên $ x $ và tính $ y = g^x $. Tuy nhiên nếu Bob muốn tìm được $ x $ cần phải giải bài toán logarit rời rạc, một bài toán hiện nay chưa có thuật toán tối ưu để giải quyết. Quá trình Alice sử dụng ZKP để chứng minh cho Bob thấy rằng mình biết $ x $ như sau:
+Alice có thể dễ dàng sinh phần tử $y$ bằng cách chọn ngẫu nhiên $x$ và tính $y = g^x$. Tuy nhiên nếu Bob muốn tìm được $x$ cần phải giải bài toán logarit rời rạc, một bài toán hiện nay chưa có thuật toán tối ưu để giải quyết. Quá trình Alice sử dụng ZKP để chứng minh cho Bob thấy rằng mình biết $x$ như sau:
 
--   Alice chọn một số ngẫu nhiên $ r \in [1, q] $ rồi đưa cho Bob phần tử $ u = g^r $.
--   Bob chọn một số ngẫu nhiên $ k \in [1, q] $ rồi đưa cho Alice.
--   Alice tính $ t = (r - kx) \mod q $ rồi đưa cho Bob.
--   Bob kiểm tra và bị thuyết phục rằng Alice biết $ x $ khi và chỉ khi $ u = y^k g^t $.
+-   Alice chọn một số ngẫu nhiên $r \in [1, q]$ rồi đưa cho Bob phần tử $u = g^r$.
+-   Bob chọn một số ngẫu nhiên $k \in [1, q]$ rồi đưa cho Alice.
+-   Alice tính $t = (r - kx) \mod q$ rồi đưa cho Bob.
+-   Bob kiểm tra và bị thuyết phục rằng Alice biết $x$ khi và chỉ khi $u = y^k g^t$.
 
-Ý tưởng chính của thuật toán là yêu cầu Alice đưa ra một biểu diễn của $ u $ theo $ y $ và $ g $, với số mũ của $ y $ trong biểu diễn đó (là $k$) được chọn bởi Bob. Sau đây là lý giải vì sao Alice cần phải biết $x$ mới đưa ra được kết quả $t$ cho Bob và vì sao sau khi đã nhận được kết quả $t$ từ Alice, Bob vẫn không biết gì về $x$:
+Ý tưởng chính của thuật toán là yêu cầu Alice đưa ra một biểu diễn của $u$ theo $y$ và $g$, với số mũ của $y$ trong biểu diễn đó (là $k$) được chọn bởi Bob. Sau đây là lý giải vì sao Alice cần phải biết $x$ mới đưa ra được kết quả $t$ cho Bob và vì sao sau khi đã nhận được kết quả $t$ từ Alice, Bob vẫn không biết gì về $x$:
 
 - Alice buộc phải biết $x$ mới đưa ra được $t$ ứng với lựa chọn ngẫu nhiên $k$ của Bob. Trước hết ta thấy với cùng một giá trị $u = g^r$, chỉ cần Alice đưa ra được 2 câu trả lời $t_1$, $t_2$ tương ứng với 2 thử thách khác nhau $k_1$, $k_2$ của Bob thì Alice phải biết $x$. Thật vậy, khi đó $k_1x + t_1 = k_2x + t_2 = r \mod q$ và khi đó giá trị $x$ được tính dễ dàng. Do đó, việc đưa ra đáp án đúng với một câu hỏi ngẫu nhiên của Bob đã thuyết phục được Bob rằng Alice có thể trả lời được bất cứ câu hỏi nào ứng với $k \in [1, q]$, và do đó phải biết $x$.
 - Sau khi đối thoại với Alice, tất cả những gì Bob biết là bộ $(u, t, k)$ thỏa mãn $u = y^k g^t$. Tuy nhiên, không cần Alice thì Bob cũng có thể tự sinh bộ số này bằng cách chọn $k$ và $t$ ngẫu nhiên rồi tính $u = y^k g^t$. Phân bố của bộ $(u, t, k)$ khi đó giống với phân bố của bộ nhận được thông qua đối thoại với Alice. Vì vậy, việc đối thoại với Alice không đem lại lợi thế nào cho Bob trong việc tìm được $x$.
