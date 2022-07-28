@@ -57,9 +57,7 @@ Như vậy, ta kết thúc được một mô hình ZKP.
 Ta bắt đầu xây dựng sơ đồ chữ ký điện tử. Mục đích của sơ đồ này là làm sao ta có thể ký trên một văn bản có nội dung được biểu diễn bởi một giá trị $m$ để không ai ngụy tạo được chữ ký, song ai cũng có thể kiểm tra tính xác thực của chữ ký.
 
 Khác biệt cơ bản của sơ đồ này với ZKP là chữ ký điện tử không cần thông qua tương tác, còn ZKP nhất thiết cần có tương tác. Nhìn lại sơ đồ ZKP ở phần 3.1., ta nhận thấy mấu chốt là Alice chỉ được biết $k$ sau khi đã chọn $u$. Trong trường hợp ngược lại, Alice hoàn toàn có thể chọn một giá trị $t$ bất kì rồi tính $u = y^k g^t$. Do đó, trong hoàn cảnh không có tương tác, mấu chốt là phải đảm bảo $u$ được chọn trước $k$. Ý tưởng tự nhiên là giá trị $k$ phải được tính như một hàm băm của $u$:
-$$
-k = H(m, u)
-$$
+$$k = H(m, u)$$
 Việc giá trị $k$ phụ thuộc vào $m$ nhằm xác thực trạng thái của văn bản khi được ký.
 
 Áp dụng vào sơ đồ ZKP ở phần 3.1. và thay đổi cuộc đối thoại giữa Alice và Bob bằng quá trình Alice ký lên văn bản $m$, ta có sơ đồ chữ ký điện tử sau:
