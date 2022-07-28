@@ -22,7 +22,7 @@ Một ví dụ đơn giản: Alice muốn thuyết phục Bob rằng có cách p
 
 Về mặt ứng dụng trong thực tế, ta thấy chữ ký là một ứng dụng của ZKP. Ý tưởng về chữ ký là một biểu tượng viết tay trong các văn bản để đại diện cho sự xác nhận của người sở hữu chữ ký đó. Một số nhược điểm rất dễ nhận thấy của hệ thống này là:
 
--   Tốn tài nguyên: thời gian chuyển văn bản trực tiếp, công sức ký tay, các khâu trung gian, ...
+-   Tốn tài nguyên: thời gian chuyển văn bản trực tiếp, công sức ký tay, các khâu trung gian,...
 -   Dễ giả mạo.
 -   Không đảm bảo toàn vẹn nội dung văn bản.
 
